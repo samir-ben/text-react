@@ -1,14 +1,12 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { signIn } from '../../store/actions/authActions';
 import { Redirect } from 'react-router-dom';
-import { signUp } from '../../store/actions/authActions';
 
-class SignUp extends Component {
+class SignIn extends Component {
   state = {
     email: '',
-    password: '',
-    firstName: '',
-    lastName: ''
+    password: ''
   };
   handleChange = e => {
     this.setState({
@@ -17,15 +15,15 @@ class SignUp extends Component {
   };
   handleSubmit = e => {
     e.preventDefault();
-    this.props.signUp(this.state);
+    this.props.signIn(this.state);
   };
   render() {
-    const { auth, authError } = this.props;
+    const { authError, auth } = this.props;
     if (auth.uid) return <Redirect to='/' />;
     return (
       <div className='container'>
         <form className='white' onSubmit={this.handleSubmit}>
-          <h5 className='grey-text text-darken-3'>Inscription</h5>
+          <h5 className='grey-text text-darken-3'>Connexion</h5>
           <div className='input-field'>
             <label htmlFor='email'>Email</label>
             <input type='email' id='email' onChange={this.handleChange} />
@@ -35,15 +33,7 @@ class SignUp extends Component {
             <input type='password' id='password' onChange={this.handleChange} />
           </div>
           <div className='input-field'>
-            <label htmlFor='firstName'>Prénom</label>
-            <input type='text' id='firstName' onChange={this.handleChange} />
-          </div>
-          <div className='input-field'>
-            <label htmlFor='lastName'>Nom</label>
-            <input type='text' id='lastName' onChange={this.handleChange} />
-          </div>
-          <div className='input-field'>
-            <button className='btn pink lighten-1 z-depth-0'>S'inscrire</button>
+            <button className='btn pink lighten-1 z-depth-0'>Se connecter</button>
             <div className='center red-text'>
               {authError ? <p>{authError}</p> : null}
             </div>
@@ -53,20 +43,21 @@ class SignUp extends Component {
     );
   }
 }
+
 const mapStateToProps = state => {
   return {
-    auth: state.firebase.auth,
-    authError: state.auth.authError
+    authError: state.auth.authError,
+    auth: state.firebase.auth
   };
 };
 
 const mapDispatchToProps = dispatch => {
   return {
-    signUp: creds => dispatch(signUp(creds))
+    signIn: creds => dispatch(signIn(creds))
   };
 };
 
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(SignUp);
+)(SignIn);
