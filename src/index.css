@@ -1,0 +1,10 @@
+.para {
+    position: relative;
+    top: 40px;
+    left: 0;
+    text-align: justify;
+}
+
+.card-title{
+    background-color: rgb(220, 220, 220);
+}
