@@ -21,3 +21,17 @@ export const addPost = post => {
       });
   };
 };
+
+export const deleteNote = (post) => {
+  return (dispatch, getState, { getFirebase, getFirestore }) => {
+    // make async call to database
+    const firestore = getFirestore();
+    firestore.collection("posts").doc(post).delete().then(() => {
+      dispatch({ type: 'DELETE_POST', post });
+    }).catch((err) => {
+      dispatch({ type: 'DELETE_POST_ERROR', err });
+    });
+  }
+};
+
+
