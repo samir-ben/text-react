@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import PostList from '../posts/PostList';
 import Quote from '../layout/Quote'
+import AddPost from '../posts/AddPost'
+import { Modal, Button } from 'react-materialize';
 import { connect } from 'react-redux';
 import { firestoreConnect } from 'react-redux-firebase';
 import { compose } from 'redux';
@@ -14,7 +16,6 @@ class Dashboard extends Component {
         };
     }
     componentDidMount() {
-    
     }
     // Récupérer la valeur sélectionnée
     handleSelection() {
@@ -36,35 +37,46 @@ class Dashboard extends Component {
             selectedText: e
         })
     }
-
+    renderButtonModal = () => {
+        if (!this.state.selectedText) {
+            return <div className="fixed-action-btn"><Button className='btn-floating btn-large disabled'><i className="material-icons">create</i></Button></div>
+        } else {
+            return <div className="fixed-action-btn"><Button className="btn-floating btn-large blue pulse" ><i className="material-icons">create</i></Button></div>
+        }
+    }
     render() {
         if (this.state.selectedText) {
             console.log(this.state.selectedText)
         }
         const { posts, auth } = this.props;
         if (!auth.uid) return <Redirect to='/signin' />
-        return <div className='dashboard container'>
+        return <div className='dashboard'>
             <Quote quote={this.state.selectedText} callback={this.reiceiveCallback.bind(this)} />
-            <div className='row'>
-              <div className='para col s6' onClickCapture={this.handleSelection.bind(this)}>
-                <p>
-                  Lorem ipsum dolor sit amet, consectetur adipiscing
-                  elit. Duis in metus et erat iaculis iaculis eu non
-                  tellus. Nam eu diam placerat nulla lobortis congue vel
-                  in urna. Vivamus auctor interdum lectus ac fringilla.
-                  Orci varius natoque penatibus et magnis dis parturient
-                  montes, nascetur ridiculus mus. Maecenas non lobortis
-                  neque. Sed at erat metus. Morbi vel ligula in dui
-                  bibendum lacinia non vitae elit. Sed lacus dolor,
-                  iaculis in lobortis eu, sodales vel turpis. Vivamus
-                  sed tellus vel quam ultrices vestibulum. Phasellus id
-                  arcu tellus. Curabitur quis ante quis lectus viverra
-                  eleifend.
-                </p>
+            <div className='dashboard container'>
+              <div className='row'>
+                <div className='para col s6' onClickCapture={this.handleSelection.bind(this)}>
+                  <p>
+                    Lorem ipsum dolor sit amet, consectetur adipiscing
+                    elit. Duis in metus et erat iaculis iaculis eu non
+                    tellus. Nam eu diam placerat nulla lobortis congue
+                    vel in urna. Vivamus auctor interdum lectus ac
+                    fringilla. Orci varius natoque penatibus et magnis
+                    dis parturient montes, nascetur ridiculus mus.
+                    Maecenas non lobortis neque. Sed at erat metus.
+                    Morbi vel ligula in dui bibendum lacinia non vitae
+                    elit. Sed lacus dolor, iaculis in lobortis eu,
+                    sodales vel turpis. Vivamus sed tellus vel quam
+                    ultrices vestibulum. Phasellus id arcu tellus.
+                    Curabitur quis ante quis lectus viverra eleifend.
+                  </p>
+                </div>
+                <div className='col s4 offset-s2'>
+                  <PostList posts={posts} />
+                </div>
               </div>
-              <div className='col s4 offset-s2'>
-                <PostList posts={posts} />
-              </div>
+              <Modal className="modal" header={this.state.selectedText} fixedFooter trigger={this.renderButtonModal()}>
+                    <AddPost callback={this.reiceiveCallback.bind(this)}/>
+              </Modal>
             </div>
           </div>;
     }
