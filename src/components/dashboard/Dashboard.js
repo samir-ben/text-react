@@ -74,8 +74,8 @@ class Dashboard extends Component {
                   <PostList posts={posts} />
                 </div>
               </div>
-              <Modal className="modal" header={this.state.selectedText} fixedFooter trigger={this.renderButtonModal()}>
-                    <AddPost callback={this.reiceiveCallback.bind(this)}/>
+              <Modal className='modal' header={this.state.selectedText} fixedFooter trigger={this.renderButtonModal()}>
+                    <AddPost quote={this.state.selectedText}  callback={this.reiceiveCallback.bind(this)}/>
               </Modal>
             </div>
           </div>;

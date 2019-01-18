@@ -7,11 +7,13 @@ import { Redirect } from 'react-router-dom';
 class AddPost extends Component {
   state = {
     title: '',
+    quote: '',
     content: ''
   };
   handleChange = e => {
     this.setState({
       [e.target.id]: e.target.value,
+      quote: this.props.quote
     });
   };
   handleSubmit = e => {
@@ -19,6 +21,7 @@ class AddPost extends Component {
     this.props.addPost(this.state);
     this.setState({
       title: '',
+      quote: '',
       content: '' });
 
   };
@@ -31,7 +34,8 @@ class AddPost extends Component {
             Ajouter un commentaire
           </h5>
           <Input type='text' id='title' onChange={this.handleChange} label='Titre' value={this.state.title} />
-        <Input type='textarea' id='content' className='materialize-textarea' onChange={this.handleChange} label='content' value={this.state.content} />
+        <Input type='text' className="hide" onChange={this.handleChange} label='Citation' value={this.state.quote} />
+          <Input type='textarea' id='content' className='materialize-textarea' onChange={this.handleChange} label='content' value={this.state.content} />
           <Button className='btn pink lighten-1' modal='close' onClick={this.reiceiveCallback.bind(this)}>
             Ajouter
           </Button>

@@ -29,12 +29,12 @@ class PostDetails extends Component {
     if (post) {
       console.log(post);
 
-      return (
-        <div className='container section post-details'>
+      return <div className='container section post-details'>
           <div className='card z-depth-0'>
             <div className='card-content'>
               <span className='card-title'>{post.title}</span>
-              <p>{post.content}</p>
+              <p>Citation : {post.quote}</p>
+              <p>Commentaire: {post.content}</p>
             </div>
             <div className='card-action grey lighten-4 grey-text'>
               <div>
@@ -42,15 +42,11 @@ class PostDetails extends Component {
               </div>
               <div>{moment(post.createdAt.toDate()).calendar()}</div>
             </div>
-            <button
-              className='btn btn-danger btn-xs'
-                      onClick={this.handleSubmit}
-            >
+            <button className='btn btn-danger btn-xs' onClick={this.handleSubmit}>
               deleteNote
             </button>
           </div>
-        </div>
-      );
+        </div>;
     } else {
       return (
         <div className='container center'>
