@@ -8,3 +8,61 @@
 .card-title{
     background-color: rgb(220, 220, 220);
 }
+
+/**** Fonts ****/
+@import url('https://fonts.googleapis.com/css?family=Quicksand');
+
+/**** Modifications générales ****/
+body{
+  background: #FFF4EA;
+  font-family: 'Quicksand', sans-serif;
+}
+::-moz-selection {
+  color: #fff;
+  background: rgb(214, 128, 71);
+}
+::selection {
+  color: #fff;
+  background: rgb(214, 128, 71);
+}
+.highligth{
+  color: #fff;
+  background: rgb(214, 128, 71);
+}
+/**** Modifications particulières ****/
+/* navbar */
+nav ,.nav-wrapper{
+  background:#181B24 !important;
+}
+.brand-logo{
+  color: #A25E30 !important;
+}
+.nav-quote{
+  transition: height 1s;
+  position: sticky;
+}
+.quote-nav-text{
+  padding: 10px 10px !important;
+}
+.quote-text{
+color: rgb(231, 231, 231);
+font-style: italic;
+}
+.quote-icons{
+  color: rgb(235, 162, 113);
+}
+.quote-close-icons{
+  cursor: pointer;
+}
+/* Transitions */
+.fade-enter {
+    opacity: 0;
+  }
+  .fade-enter-active {
+    opacity: 1;
+    transition: opacity 500ms ease-in;
+  }
+  .fade-leave.fade-leave-active{
+    opacity:0;
+    transition:  opacity 500ms ease-out;
+  }
