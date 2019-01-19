@@ -4,12 +4,7 @@ import 'firebase/auth';
 
 // Initialize Firebase
 var config = {
-    apiKey: "AIzaSyBM4wUx7-z-ANqO6SJEiXcumFWfWMcs0bw",
-    authDomain: "text-react.firebaseapp.com",
-    databaseURL: "https://text-react.firebaseio.com",
-    projectId: "text-react",
-    storageBucket: "text-react.appspot.com",
-    messagingSenderId: "766800882372"
+  //your firebase config
 };
 
 firebase.initializeApp(config);
