@@ -80,15 +80,21 @@ class Dashboard extends Component {
             <Quote quote={this.state.selectedText} callback={this.reiceiveCallback.bind(this)} />
             <div className='dashboard container'>
               <div className='row'>
-                    <div id="text" className="col s6 main-card card-panel z-depth-2" onClickCapture={this.handleSelection.bind(this)}  >
-                        {this.renderVerseList()}
-                    </div>
-                <div className='col s4 offset-s2'>
+                <div id='text' className='col s6 main-card card-panel z-depth-2' onClickCapture={this.handleSelection.bind(this)}>
+                  {this.renderVerseList()}
+                </div>
+                
+                <div className='col s5 offset-s1'>
+                  <p className="postlist-title">Commentaires:</p>
                   <PostList posts={posts} />
                 </div>
               </div>
-              <Modal className='modal' header={this.state.selectedText} fixedFooter trigger={this.renderButtonModal()}>
-                    <AddPost quote={this.state.selectedText}  callback={this.reiceiveCallback.bind(this)}/>
+              <Modal className='modal' fixedFooter trigger={this.renderButtonModal()}>
+                <div className="selection-form">
+                    <h5>Passage selectionné</h5>
+                    <p>«{this.state.selectedText}»</p>
+                </div>
+                <AddPost quote={this.state.selectedText} callback={this.reiceiveCallback.bind(this)} />
               </Modal>
             </div>
           </div>;

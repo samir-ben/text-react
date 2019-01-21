@@ -8,9 +8,6 @@ const SignedInLinks = props => {
     <div>
       <ul className='right'>
         <li>
-          <NavLink to='/add'>Nouveau commentaire</NavLink>
-        </li>
-        <li>
           <a href='/' onClick={props.signOut}>
             Déconnexion
           </a>

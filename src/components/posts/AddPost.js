@@ -28,11 +28,11 @@ class AddPost extends Component {
   render() {
     const { auth } = this.props;
     if (!auth.uid) return <Redirect to='/signin' />;
-    return <div className='container'>
+    return <div>
         <form className='white' onSubmit={this.handleSubmit}>
-          <h5 className='grey-text text-darken-3'>
+          <p className='grey-text text-darken-3'>
             Ajouter un commentaire
-          </h5>
+          </p>
           <Input type='text' id='title' onChange={this.handleChange} label='Titre' value={this.state.title} />
         <Input type='text' className="hide" onChange={this.handleChange} label='Citation' value={this.state.quote} />
           <Input type='textarea' id='content' className='materialize-textarea' onChange={this.handleChange} label='content' value={this.state.content} />

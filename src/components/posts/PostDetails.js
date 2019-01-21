@@ -30,27 +30,27 @@ class PostDetails extends Component {
       console.log(post);
 
       return <div className='container section post-details'>
-          <div className='card z-depth-0'>
-            <div className='card-content'>
-              <span className='card-title'>{post.title}</span>
-              <p>Citation : {post.quote}</p>
-              <p>Commentaire: {post.content}</p>
+        <div className='card z-depth-3'>
+          <i className="material-icons delete-icon" onClick={this.handleSubmit}>delete</i>
+            <div className='card-content post-detail'>
+            <h3 className=''><span className="black-text">Titre : {post.title}</span></h3>
+              <h3>Passage selectionné :</h3>
+              <p>«{post.quote}»</p>
+              <h3>Commentaire:</h3>
+              <p>{post.content}</p>
             </div>
             <div className='card-action grey lighten-4 grey-text'>
               <div>
-                Posted by {post.authorFirstName} {post.authorLastName}
+                Posté par {post.authorFirstName} {post.authorLastName}
               </div>
               <div>{moment(post.createdAt.toDate()).calendar()}</div>
             </div>
-            <button className='btn btn-danger btn-xs' onClick={this.handleSubmit}>
-              deleteNote
-            </button>
           </div>
         </div>;
     } else {
       return (
         <div className='container center'>
-          <p>Loading posts...</p>
+          <p>Chargements des commentaires...</p>
         </div>
       );
     }

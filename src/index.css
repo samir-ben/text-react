@@ -1,12 +1,76 @@
-.para {
-    position: relative;
-    top: 40px;
-    left: 0;
-    text-align: justify;
+#text {
+  margin-top: 18px;
+  text-align: justify;
+}
+
+.modal, .modal input, .modal textarea{
+  background-color:rgb(255, 255, 255) !important;
+}
+
+.log {
+  background-color: #fff4ea !important;
+}
+
+/* .card {
+  border: 1px solid rgb(127, 198, 233)
+} */
+
+.selection-form{
+  padding: 5px;
+  border: 1px solid rgb(214, 128, 71);
+  background-color:  rgb(233, 233, 233);
+}
+
+.selection-form h5{
+  color: rgb(214, 128, 71);
+}
+
+.selection-form p{
+  font-style: italic;
+  background-color: rgb(233, 233, 233); 
+}
+
+.postlist-title{
+  font-weight: bold;
+  margin-bottom: -10px;
 }
 
 .card-title{
-    background-color: rgb(220, 220, 220);
+    background-color: rgb(237, 215, 194);
+    padding: 2px 5px;
+    font-size: 1em !important;
+}
+
+.post-list-citation {
+  background-color: rgb(233, 233, 233);
+  font-style: italic;
+}
+
+.delete-icon {
+  position: absolute !important;
+  top: 0;
+  right: 0;
+  cursor: pointer;
+  color: rgb(187, 187, 187);
+  padding: 5px;
+  font-size: 1.2em;
+}
+
+.delete-icon:hover {
+  color: rgb(34, 34, 34);
+}
+
+
+.post-detail h3{
+  font-size: 1.7em;
+  font-style: bold;
+  color: rgb(214, 128, 71);
+}
+
+.post-detail p {
+  border: 1px dashed rgb(164, 164, 164);
+  font-style: italic;
+  padding: 10px;
 }
 
 /**** Fonts ****/
