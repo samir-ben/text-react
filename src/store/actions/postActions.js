@@ -5,8 +5,8 @@ export const addPost = post => {
     const profile = getState().firebase.profile;
     const authorId = getState().firebase.auth.uid;
     firestore
-      .collection('posts')
-      .add({
+      .add({ collection: 'posts' },
+      {
         ...post,
         authorFirstName: profile.firstName,
         authorLastName: profile.lastName,
@@ -26,7 +26,8 @@ export const deleteNote = (post) => {
   return (dispatch, getState, { getFirebase, getFirestore }) => {
     // make async call to database
     const firestore = getFirestore();
-    firestore.collection("posts").doc(post).delete().then(() => {
+    firestore.delete({ collection: 'posts', doc: post })
+    .then(() => {
       dispatch({ type: 'DELETE_POST', post });
     }).catch((err) => {
       dispatch({ type: 'DELETE_POST_ERROR', err });

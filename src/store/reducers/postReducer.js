@@ -9,8 +9,7 @@ const postReducer = (state = initState, action) => {
       console.log('add post error', action.err);
       return state;
     case 'DELETE_POST':
-      console.log('Delete post', action.post, state);
-      return state
+      return state;
     case 'DELETE_POST_ERROR':
       console.log('Delete post error', action.err, state);
       return state;
