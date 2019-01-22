@@ -13,8 +13,13 @@ class Dashboard extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      selectedText: null
+      selectedText: null,
+      posts: this.props.posts
     };
+  }
+  componentDidMount() {
+    this.state.posts && this.selectionHighLight();
+
   }
   // Récupérer la valeur sélectionnée
   handleSelection() {
@@ -59,25 +64,27 @@ class Dashboard extends Component {
     const { verses } = this.props.verses;
     if (verses) {
       return verses.map(verse => {
-        return <VerseItem key={verse.id} verses={verse.verse} />;
+        return <VerseItem key={verse.id} verses={verse.verse} hight={this.selectionHighLight.bind()} />;
       });
     }
   };
 
-    renderPostList = () => {
-        const { auth, posts } = this.props;
-        let arrayPost = {};
-        if (this.props.posts) {
-            const postFiltered = posts.filter(post => {
-                return post.authorId === auth.uid;
-            });
-            postFiltered[arrayPost] = postFiltered;
-            return <div className='col s5 offset-s1'>
-                <p className='postlist-title'>Commentaires:</p>
-                <PostList posts={postFiltered} />
-              </div>;
-        }
-    };
+  renderPostList = () => {
+    const { auth, posts } = this.props;
+    let arrayPost = {};
+    if (this.props.posts) {
+      const postFiltered = posts.filter(post => {
+        return post.authorId === auth.uid;
+      });
+      postFiltered[arrayPost] = postFiltered;
+      return (
+        <div className='col s5 offset-s1'>
+          <p className='postlist-title'>Commentaires:</p>
+          <PostList posts={postFiltered} />
+        </div>
+      );
+    }
+  };
 
   selectionHighLight() {
     var arrayText = [];
@@ -86,27 +93,23 @@ class Dashboard extends Component {
     });
     arrayText.push(text);
     let arrayComment = [];
-    if (this.state.posts) {
-      const comment = this.props.posts.map(post => {
-        return `${post.quote}`;
-      });
-      arrayComment.push(comment);
-      comment.map(com => {
-        return (document.getElementById(
-          'text'
-        ).innerHTML = document
-          .getElementById('text')
-          .innerHTML.replace(
-            com,
-            `<span class="highligth tooltipped" data-position="top" data-tooltip="Passage commenté">${com}</span>`
-          ));
-      });
-    }
+    const comment = this.props.posts.map(post => {
+      return `${post.quote}`;
+    });
+    console.log('comment', comment);
+    arrayComment.push(comment);
+    comment.map(com => {
+      return (document.getElementById('text')
+        .innerHTML = document
+        .getElementById('text')
+        .innerHTML.replace(
+          com,
+          `<span class="highligth tooltipped" data-position="top" data-tooltip="Passage commenté">${com}</span>`
+        ));
+    });
   }
   render() {
-    if (this.props.posts) {
-      this.selectionHighLight();
-    }
+
     const { auth } = this.props;
     if (!auth.uid) return <Redirect to='/signin' />;
     return (
@@ -148,11 +151,13 @@ class Dashboard extends Component {
 }
 const mapStateToProps = (state) => {
     return {
-        verses: state.verses,
         posts: state.firestore.ordered.posts,
+        verses: state.verses,
         auth: state.firebase.auth,
     }
 }
+
+
 
 export default compose(
     connect(mapStateToProps),
