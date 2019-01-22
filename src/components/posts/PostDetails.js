@@ -22,16 +22,23 @@ class PostDetails extends Component {
     this.props.history.push('/');
   };
 
+  renderDelete = () => {
+    const { auth, post } = this.props;
+    if (auth.uid === post.authorId){
+      return <i className="material-icons delete-icon" onClick={this.handleSubmit}>delete</i>
+    }
+  }
+
   render() {
     const { post, auth } = this.props;
     if (!auth.uid) return <Redirect to='/signin' />;
     if (this.state.redirect) return <Redirect to='/' />;
     if (post) {
-      console.log(post);
+      console.log('post', post, 'aut',auth);
 
       return <div className='container section post-details'>
         <div className='card z-depth-3'>
-          <i className="material-icons delete-icon" onClick={this.handleSubmit}>delete</i>
+          {this.renderDelete()}
             <div className='card-content post-detail'>
             <h3 className=''><span className="black-text">Titre : {post.title}</span></h3>
               <h3>Passage selectionné :</h3>
